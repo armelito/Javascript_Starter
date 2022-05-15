@@ -1,0 +1,60 @@
+.preloader
+  @extend .cover
+  @extend .flex--cc
+  flex-direction column
+
+  background $background-2
+  text-align center
+
+  position fixed
+  overflow hidden
+  width 100vw
+  height 100vh
+  z-index 20
+
+  &__progressBar
+    absolute-lt(0, 0)
+    z-index 21
+
+    background $white
+    width 100vw
+    height 3px
+
+    transform-origin left
+    transform scaleX(0)
+    transition transform 0.7s $ease-out-expo
+    will-change transform
+
+    &:hover
+      transform scaleX(100%)
+
+
+  &__media
+    width ratio(56)
+    height ratio(56)
+    animation fadeInOut 400ms ease
+
+    &__logo
+      animation loading 2s infinite
+      animation-delay 400ms
+      transition opacity 300ms
+      will-change opacity
+
+  &__number
+    margin-top 24px
+    font-size pxToRem(16)
+    color $white    
+
+@keyframes loading 
+{
+  0% { opacity: 0 }
+  50% { opacity: 1 }
+  100% { opacity: 0 }
+}
+
+@keyframes fadeInOut 
+{
+  from { transform: scale(1) }
+  38% { transform: scale(2) }
+  to { transform: scale(1) }
+}

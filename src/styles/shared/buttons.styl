@@ -1,0 +1,32 @@
+button
+  // Style
+  border 1px $white solid
+  color $white
+
+  &:hover
+    cursor pointer
+
+.button--primary
+  &--large
+    // Sizes
+    width ratio(380)
+    height ratio(104)
+    box-sizing border-box
+    // Text
+    font-family $font-title-small
+    font-size $H4
+    font-weight 900
+    letter-spacing pxToRem(0.4)
+    line-height pxToRem(36)
+
+  &--medium
+    font-family $font-text-bold
+    font-size pxToRem(16)
+    letter-spacing pxToRem(0.4)
+    line-height pxToRem(28)
+
+  &--small
+    font-family $font-text-bold
+    font-size pxToRem(14)
+    letter-spacing pxToRem(0.4)
+    line-height pxToRem(28)

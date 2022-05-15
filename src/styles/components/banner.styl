@@ -1,0 +1,79 @@
+.banner__wrapper
+  // Sizes
+  overflow hidden
+  width 100vw
+  // Position
+  //margin-bottom ratio(160)
+  // Styles
+  background-color $white
+  // Animation
+  animation-name fadeWrapper
+  animation-duration 12s
+  animation-delay 0
+  animation-timing-function cubic-bezier(0.23, 1, 0.32, 1)
+  animation-iteration-count infinite
+
+
+.banner__borderTop, .banner__borderBottom
+  // Sizes
+  width 100%
+  height pxToRem(2)
+  // Styles
+  background-color $background-2
+
+.banner__content
+  // Flex
+  display flex
+  justify-content space-between
+  align-items flex-start
+  // Sizes
+  width pxToRem(4960)
+  padding pxToRem(40) pxToRem(0)
+  // Position
+  position relative
+  left 0px
+
+  &__text
+    // Flex
+    display flex
+    align-items flex-start
+    justify-content space-between
+    // Sizes
+    width pxToRem(2400)
+
+.banner__skill
+  // Text style
+  font-family $font-title-large
+  font-size pxToRem(148)
+  letter-spacing pxToRem(0)
+  line-height pxToRem(140)
+  // Color
+  color $background
+  // Animation
+  animation-name fadeSkill
+  animation-duration 12s
+  animation-delay 0
+  animation-timing-function cubic-bezier(0.23, 1, 0.32, 1)
+  animation-iteration-count infinite
+
+// Fade animations
+@keyframes fadeWrapper
+  from
+    background-color $white
+
+  50%
+    background-color $background-2
+
+  to
+    background-color $white
+
+@keyframes fadeSkill
+  from
+    color $background
+
+  50%
+    color $white
+
+  to
+    color $background
+

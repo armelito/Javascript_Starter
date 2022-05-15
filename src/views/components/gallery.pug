@@ -1,0 +1,9 @@
+.gallery
+  .gallery__wrapper
+    each collection in collections
+      each project in collection.data.projects
+        section.gallery__section
+          a.gallery__project.--navigation__link(href=Link(project.projects_project))
+            h1.gallery__project__title=project.projects_project.data.title
+            figure.gallery__project__media
+              img.gallery__project__media__image(alt=project.projects_project.data.image.alt data-src=project.projects_project.data.image.url)

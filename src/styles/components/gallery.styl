@@ -1,0 +1,87 @@
+.gallery
+  display flex
+  justify-content center
+  align-items center
+  width 100vw
+
+  &__section
+    margin 40px 0
+
+    &:nth-child(1)
+      margin-top 20px
+
+      a 
+        margin-left 300px
+
+    &:nth-child(2)
+      a
+        margin-left 240px
+
+    &:nth-child(3)
+      a
+        margin-left 500px
+
+    &:nth-child(4)
+      a
+        margin-left 316px
+
+    &:nth-child(5)
+      a
+        margin-left 260px
+
+    &:nth-child(6)
+      a
+        margin-left 430px
+
+    &:nth-child(7)
+      a
+        margin-left 370px
+
+    &:nth-child(8)
+      a
+        margin-left 280px
+
+    &:nth-child(9)
+      a
+        margin-left 479px
+
+    &:nth-child(10)
+      margin-bottom 20px
+
+      a
+        margin-left 450px
+
+  &__project
+    display flex
+    align-items center
+
+    &__media
+      width 120px
+      height 75px
+      margin-left 16px
+      opacity 0
+      pointer-events none
+
+    &__title
+      height 100px
+      line-height 98px
+      font-size 112px
+      pointer-events none
+      color $background
+      -webkit-text-stroke-width 1px
+      -webkit-text-stroke-color $subtitle
+
+
+.gallery__project:hover
+{
+  .gallery__project__title
+  {
+    color $title
+    -webkit-text-stroke-width none
+  }
+    
+  //.gallery__project__media
+  //{
+  //  transform rotateY(0deg) scaleX(1)
+  //}
+}

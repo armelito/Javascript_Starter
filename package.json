@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Welcome to my portfolio. In this place you can find my work and discover who I am. Contact me if you want to work with me.",
   "scripts": {
-    "backend:build": "node app.js",
-    "backend:development": "nodemon app.js",
-    "frontend:build": "webpack --progress --config webpack.config.build.js",
-    "frontend:development": "webpack serve --progress --config webpack.config.development.js",
-    "dev": "concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\""
+    "backend:build": "node ./server/init.js",
+    "backend:development": "nodemon ./server/init.js",
+    "frontend:build": "webpack --progress --config ./bundler/webpack.config.build.js",
+    "frontend:development": "webpack serve --progress --config ./bundler/webpack.config.development.js",
+    "dev": "NODE_ENV=development concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\""
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,8 @@
     "concurrently": "^6.3.0",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.3.0",
+    "dat-gui": "^0.5.0",
+    "dat.gui": "^0.7.9",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
@@ -51,6 +53,7 @@
     "postcss-loader": "^6.1.1",
     "prefix": "^1.0.0",
     "raw-loader": "^4.0.2",
+    "stylus-loader": "^6.2.0",
     "terser-webpack-plugin": "^5.2.4",
     "webpack": "^5.55.1",
     "webpack-cli": "^4.8.0",
@@ -61,6 +64,7 @@
     "@prismicio/client": "^6.2.0",
     "@prismicio/helpers": "^2.1.1",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
