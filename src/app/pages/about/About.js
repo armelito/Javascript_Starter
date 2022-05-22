@@ -1,4 +1,5 @@
 import Page from '../../classes/Page'
+import Button from '../../classes/Button'
 
 export default class About extends Page
 {
@@ -7,12 +8,28 @@ export default class About extends Page
     super({
       id: 'about',
       element: '.about',
-      children:
+      elements:
       {
         wrapper: '.about__wrapper',
         navigation: document.querySelector('.navigation'),
-        title: '.about__title'
+        link: '.about__link'
       }
     })
+  }
+
+  create()
+  {
+    super.create()
+
+    this.link = new Button ({
+      element: this.elements.link
+    })
+  }
+
+  destroy()
+  {
+    super.destroy()
+
+    this.link.removeEventListeners()
   }
 }

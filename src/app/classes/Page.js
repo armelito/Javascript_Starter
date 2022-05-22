@@ -1,16 +1,12 @@
 import GSAP from 'gsap'
-
 import Prefix from 'prefix'
-
 import each from 'lodash/each'
 import map from 'lodash/map'
 
 import { Title, Paragraph, Label, Highlight } from 'animations/index'
 
 import AsyncLoad from 'classes/AsyncLoad'
-
 import { ColorsManager } from 'classes/Colors'
-
 export default class Page
 {
   constructor({ element, elements, id })
@@ -19,12 +15,10 @@ export default class Page
     this.selectorChildren =
     {
       ...elements,
-
       aimationsHighlights: '[data-animation="highlight"]',
       animationsTitles: '[data-animation="title"]',
       animationsParagraphs: '[data-animation="paragraph"]',
       animationsLabels: '[data-animation="label"]',
-
       preloaders: '[data-src]',
     };
 
@@ -146,15 +140,15 @@ export default class Page
           {
             autoAlpha: 1,
           }
-        );
+        )
       }
 
       this.animationIn.call((_) => {
-        this.addEventListeners();
+        this.addEventListeners()
 
-        resolve();
-      });
-    });
+        resolve()
+      })
+    })
   }
 
   hide() {
@@ -214,12 +208,11 @@ export default class Page
   // Listeners
 
   addEventListeners() {}
-
   removeEventListeners() {}
 
   // Destroy
 
   destroy() {
-    this.removeEventListeners();
+    this.removeEventListeners()
   }
 }

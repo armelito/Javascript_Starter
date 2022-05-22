@@ -3,7 +3,7 @@
   @extend .flex--cc
   flex-direction column
 
-  background $background-2
+  background $background
   text-align center
 
   position fixed
@@ -12,49 +12,114 @@
   height 100vh
   z-index 20
 
-  &__progressBar
-    absolute-lt(0, 0)
-    z-index 21
-
-    background $white
-    width 100vw
-    height 3px
-
-    transform-origin left
-    transform scaleX(0)
-    transition transform 0.7s $ease-out-expo
-    will-change transform
-
-    &:hover
-      transform scaleX(100%)
-
+  &__box
+    display flex
+    flex-direction column
+    align-items center
+    justify-content space-between
+    min-height 184px
 
   &__media
-    width ratio(56)
-    height ratio(56)
-    animation fadeInOut 400ms ease
+    width ratio(80)
+    height ratio(80)
 
-    &__logo
-      animation loading 2s infinite
-      animation-delay 400ms
-      transition opacity 300ms
-      will-change opacity
+  &__loader
+    display flex
+    flex-direction column
+    justify-content space-between
+    min-height 60px
 
-  &__number
-    margin-top 24px
-    font-size pxToRem(16)
-    color $white    
 
-@keyframes loading 
-{
-  0% { opacity: 0 }
-  50% { opacity: 1 }
-  100% { opacity: 0 }
-}
+    &__bars
+      position relative
+      width 166px
+      height 8px
 
-@keyframes fadeInOut 
-{
-  from { transform: scale(1) }
-  38% { transform: scale(2) }
-  to { transform: scale(1) }
-}
+      &__progress
+        position absolute
+        z-index 2
+        border-radius 100px
+        width 100%
+        height 100%
+        background $primary
+
+        transform-origin left
+        transition transform 300ms $ease-out-01
+        transform scaleX(0)
+        will(transform)
+
+
+      &__background
+        position absolute
+        z-index 1
+        border-radius 100px
+        width 100%
+        height 100%
+        background $grey-5
+
+    &__number
+      margin-top 24px
+      line-height 140%
+      font-family $font-family-helvetica-extraBold
+      font-size $font-size-H6
+      color $white
+
+  &__transitionScreen
+    position absolute
+    top 0
+    left 0
+    bottom 0
+    right 0
+
+    widht 100vw
+    height 100vh
+
+    &__top
+      position absolute
+      top 0
+      left ratio(940)
+      width ratio(1283)
+      height ratio(504)
+
+      display flex
+
+      transition transform 300ms $ease-out-01
+      opacity 0
+      //transform translateX(120vw)
+      will(transform)
+
+      p
+        font-family $font-family-helvetica-extraBold
+        font-weight 900
+        font-size 360px
+        line-height 140%
+        letter-spacing 2%
+        color $primary
+
+        &:first-child
+          margin-right 72px
+
+    &__bottom
+      position absolute
+      bottom 0
+      left ratio(-2265.88)
+      width ratio(1404)
+      height ratio(504)
+
+      display flex
+
+      transition transform 300ms $ease-out-01
+      opacity 0
+      //transform translateX(-150vw)
+      will(transform)
+
+      p
+        font-family $font-family-helvetica-extraBold
+        font-weight 900
+        font-size 360px
+        line-height 140%
+        letter-spacing 2%
+        color $primary
+
+        &:first-child
+          margin-right 72px

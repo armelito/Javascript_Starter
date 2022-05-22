@@ -1,6 +1,6 @@
 import Page from '../../classes/Page'
+import Button from '../../classes/Button'
 import Gallery from '../../components/Gallery'
-import Button from '../../components/Button'
 
 export default class Home extends Page
 {
@@ -9,12 +9,11 @@ export default class Home extends Page
     super({
       id: 'home',
       element: '.home',
-      children:
+      elements:
       {
         wrapper: '.home__wrapper',
         section: document.querySelector('.gallery__project'),
         navigation: document.querySelector('.navigation'),
-        link: '.home__link',
       },
       components: ['gallery'],
       infiniteScroll: true
@@ -25,17 +24,11 @@ export default class Home extends Page
   {
     super.create()
 
-    this.link = new Button ({
-      element: this.element.link
-    })
-
     this.gallery = new Gallery()
   }
 
   destroy()
   {
     super.destroy()
-
-    this.link.removeEventListeners()
   }
 }

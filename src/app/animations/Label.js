@@ -1,6 +1,5 @@
 import GSAP from 'gsap'
 import Animation from 'classes/Animation'
-
 export default class Label extends Animation
 {
   constructor({ element, elements })

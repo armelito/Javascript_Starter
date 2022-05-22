@@ -1,4 +1,5 @@
 import Page from '../../classes/Page'
+import Button from '../../classes/Button'
 
 export default class Contact extends Page
 {
@@ -7,11 +8,28 @@ export default class Contact extends Page
     super({
       id: 'contact',
       element: '.contact',
-      children:
+      elements:
       {
         wrapper: '.contact__wrapper',
-        navigation: document.querySelector('.navigation')
+        navigation: document.querySelector('.navigation'),
+        link: '.contact__link'
       }
     })
+  }
+
+  create()
+  {
+    super.create()
+
+    this.link = new Button ({
+      element: this.elements.link
+    })
+  }
+
+  destroy()
+  {
+    super.destroy()
+
+    this.link.removeEventListeners()
   }
 }

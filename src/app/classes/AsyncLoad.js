@@ -1,5 +1,4 @@
-import Component from './Component'
-
+import Component from 'classes/Component'
 export default class AsyncLoad extends Component
 {
   constructor({ element })
@@ -11,22 +10,21 @@ export default class AsyncLoad extends Component
 
   createObserver()
   {
-    this.observer = new window.IntersectionObserver(entries =>
+    this.observer = new window.IntersectionObserver((entries) =>
     {
-      entries.forEach(entry =>
+      entries.forEach((entry) =>
       {
-        if(entry.isIntersecting)
+        if (entry.isIntersecting)
         {
-          if(!this.element.src)
+          if (!this.element.src)
           {
             this.element.src = this.element.getAttribute('data-src')
-            this.element.onload = _ => this.element.classList.add('loaded')
+            this.element.onload = _ =>
+            {
+                this.element.classList.add('loaded')
+            }
           }
-
-          else this.element.classList.add('loaded')
         }
-
-        else this.element.classList.remove('loaded')
       })
     })
 

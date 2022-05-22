@@ -1,25 +1,48 @@
-import Page from '../../classes/Page'
 import GSAP from 'gsap'
+import Button from 'classes/Button'
+import Page from 'classes/Page'
 
-export default class Project extends Page
+export default class Detail extends Page
 {
   constructor()
   {
     super({
-      id: 'project',
-      element: '.project',
-      children:
-      {
-        wrapper: document.querySelector('.project__wrapper'),
-        navigation: document.querySelector('.navigation'),
-        imageFilter: document.querySelector('.project__filtre'),
-        title: document.querySelector('.project__title'),
-        description: document.querySelector('.project__description'),
-        imageHero: document.querySelector('.project__hero__image')
-      }
+      id: 'detail',
+      element: '.detail',
+      elements: {
+        button: '.detail__button',
+      },
     })
   }
 
-  addEventListeners() {}
-  removeEventListeners() {}
+  create()
+  {
+    super.create()
+
+    this.link = new Button({ element: this.elements.button })
+  }
+
+  show()
+  {
+    const timeline = GSAP.timeline({ delay: 2 })
+
+    timeline.fromTo(
+      this.element,
+      {
+        autoAlpha: 0,
+      },
+      {
+        autoAlpha: 1,
+      }
+    )
+
+    super.show(timeline)
+  }
+
+  destroy()
+  {
+    super.destroy()
+
+    this.link.removeEventListeners()
+  }
 }
