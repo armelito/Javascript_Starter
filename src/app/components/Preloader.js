@@ -4,16 +4,15 @@ import Component from 'classes/Component'
 import each from 'lodash/each'
 export default class Preloader extends Component
 {
-  constructor({ experience })
+  constructor({ experience, cursor })
   {
     super({
       element: '.preloader',
       elements:
       {
+        media: '.preloader__media',
         logo: '.preloader__media__logo',
-        loader: '.preloader__loader',
-        bar: '.preloader__loader__bars__progress',
-        number: '.preloader__loader__number',
+        number: '.preloader__number',
         transitionScreen: '.preloader__transitionScreen',
         animationTop: '.preloader__transitionScreen__top',
         animationBottom: '.preloader__transitionScreen__bottom',
@@ -21,9 +20,8 @@ export default class Preloader extends Component
       },
     })
 
-    console.log(this.elements.loader)
-
     this.experience = experience
+    this.cursor = cursor
 
     window.TEXTURES = {}
 
@@ -54,7 +52,7 @@ export default class Preloader extends Component
     {
       texture.image = media
 
-      this.onAssetLoaded()
+      //this.onAssetLoaded()
     }
 
     window.TEXTURES[image] = texture
@@ -66,7 +64,6 @@ export default class Preloader extends Component
 
     const percent = this.length / this.elements.images.length
 
-    this.elements.bar.style.transform = `scaleX(${Math.round(percent * 100)}%)`
     this.elements.number.innerHTML = `${Math.round(percent * 100)}%`
 
     if (percent === 1)
@@ -82,13 +79,14 @@ export default class Preloader extends Component
       this.emit('completed')
 
       const animation = GSAP.timeline()
-      animation.add(this.namesAnimation())
-      animation.add(this.loaderAnimation())
-      animation.add(this.conclusion(resolve))
+      animation.add(this.hideLoader())
+      animation.add(this.namesTranslation())
+      animation.add(this.showCursor())
+      animation.add(this.hidePreloader(resolve))
     })
   }
 
-  loaderAnimation()
+  hideLoader()
   {
     this.timeline = GSAP.timeline({
       defaults:
@@ -98,7 +96,7 @@ export default class Preloader extends Component
       delay: 1
     })
 
-    this.timeline.to(this.elements.loader,
+    this.timeline.to(this.elements.number,
     {
       duration: 3,
       scale: 0,
@@ -107,29 +105,29 @@ export default class Preloader extends Component
       delay: 0.1,
     }, 0)
 
-    this.timeline.to(this.elements.loader,
+    this.timeline.to(this.elements.number,
     {
       duration: 0.8,
-      y: '40%',
+      y: '30%',
     }, 0)
 
-    this.timeline.to(this.elements.logo,
+    this.timeline.to(this.elements.media,
     {
-      duration: 0.4,
+      duration: 1,
       opacity: 0,
       transformOrigin: '50% 50%',
-      delay: 0.9,
+      delay: 1.1,
     }, 0)
 
-    this.timeline.to(this.elements.logo,
+    this.timeline.to(this.elements.media,
     {
       duration: 0.6,
-      y: '50%',
+      y: '30%',
       delay: 0.1,
     }, 0)
   }
 
-  namesAnimation()
+  namesTranslation()
   {
     this.timeline = GSAP.timeline({ delay: 3.2 })
 
@@ -176,7 +174,13 @@ export default class Preloader extends Component
     }, 2.7)
   }
 
-  conclusion()
+  showCursor()
+  {
+    this.cursor.show()
+  }
+
+
+  hidePreloader(resolve)
   {
     this.timeline = GSAP.timeline({ delay: 7.8 })
 
@@ -191,7 +195,7 @@ export default class Preloader extends Component
     this.timeline.to(this.element,
     {
       autoAlpha: 0,
-      duration: 1,
+      duration: 1
     })
 
     this.timeline.call((_) =>

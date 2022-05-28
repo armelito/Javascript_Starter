@@ -1,0 +1,142 @@
+$border-width = 2px //width of spinners border
+$basic-spinner-dimensions = 56px
+
+.cursor__border
+  pointer-events none
+  position absolute
+  z-index 10000
+  width 56px
+  height 104px
+  left 0
+  top 0
+
+  display flex
+  flex-direction column
+  justify-content center
+  align-items center
+
+  opacity 0
+  transform translate3d(-50%, -50%, 0)
+  transition all $ease-out-01 400ms
+  will-change transform
+  will-change opacity
+
+  & figure
+      width 16px
+      height 16px
+      opacity 0
+      will-change transform
+      will-change opacity
+
+  & figure.cursor__border__up__media.--wheel-off
+    transform-origin 0% 50%
+    opacity 1
+    animation wheel-off-media-up 1.3s infinite $ease-out-01
+
+  & figure.cursor__border__down__media.--wheel-off
+    transform-origin 100% 50%
+    opacity 1
+    animation wheel-off-media-down 1.3s infinite $ease-out-01
+
+  &__spinner
+    width $basic-spinner-dimensions
+    height $basic-spinner-dimensions
+
+    &.--default
+      border solid $border-width $secondary
+      border-radius 200px
+
+    &.--hover
+      position relative
+
+      &:before,
+      &:after
+        content ""
+        display block
+        position absolute
+        top 0
+        left 0
+        width $basic-spinner-dimensions
+        height $basic-spinner-dimensions
+        border solid $border-width $white
+        border-radius 200px
+        will-change transform
+        will-change opacity
+
+      &:before
+        filter blur(1px)
+        animation scale-spinner 1.6s linear 0s infinite
+
+      &:after
+        opacity 0
+        animation scale-spinner 1.6s linear 0.5s infinite
+
+.cursor__inner
+  pointer-events none
+  position absolute
+  z-index 10000
+  left 0
+  top 0
+  width 56px
+  height 104px
+
+  display flex
+  flex-direction column
+  justify-content center
+  align-items center
+
+  opacity 0
+  transform translate3d(-50%, -50%, 0)
+  transition all $ease-out-01 400ms
+  will-change transform
+  will-change opacity
+
+  &__pointer
+    width 14px
+    height 14px
+    background $secondary
+    border-radius 200px
+
+  &__media
+    width 24px
+    height 24px
+
+
+@keyframes wheel-off-media-up {
+	0% {
+		transform: translateY(0px) scale(1.0);
+    opacity: 1;
+	}
+	100% {
+		transform: translateY(-10px) scale(1.2);
+    opacity: 0.2;
+	}
+}
+
+@keyframes wheel-off-media-down {
+	0% {
+		transform: translateY(0px) scale(1.0);
+    opacity: 1;
+	}
+	100% {
+		transform: translateY(10px) scale(1.2);
+    opacity: 0.2;
+	}
+}
+
+@keyframes scale-spinner {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}

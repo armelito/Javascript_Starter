@@ -17,52 +17,45 @@
     flex-direction column
     align-items center
     justify-content space-between
-    min-height 184px
+    min-height 144px
 
   &__media
+    position relative
     width ratio(80)
     height ratio(80)
 
-  &__loader
-    display flex
-    flex-direction column
-    justify-content space-between
-    min-height 60px
+    & img
+      position absolute
+      transform translate(-50%, -50%)
+      z-index 2
+      width 100%
+      height 100%
+      top 50%
+      left 50%
 
 
-    &__bars
-      position relative
-      width 166px
-      height 8px
+    &__box
+      position absolute
+      transform translate(-50%, -50%)
+      z-index 1
+      width ratio(140)
+      height ratio(140)
+      top 50%
+      left 50%
 
-      &__progress
-        position absolute
-        z-index 2
-        border-radius 100px
+      & div
         width 100%
         height 100%
-        background $primary
-
-        transform-origin left
-        transition transform 300ms $ease-out-01
-        transform scaleX(0)
-        will(transform)
-
-
-      &__background
-        position absolute
-        z-index 1
-        border-radius 100px
-        width 100%
-        height 100%
+        border-radius 50%
         background $grey-5
+        animation loader 1.0s infinite ease-in-out
 
-    &__number
-      margin-top 24px
-      line-height 140%
-      font-family $font-family-helvetica-extraBold
-      font-size $font-size-H6
-      color $white
+
+  &__number
+    line-height 140%
+    font-family $font-family-helvetica-regular
+    font-size $font-size-bodyMedium
+    color $white
 
   &__transitionScreen
     position absolute
@@ -76,7 +69,7 @@
 
     &__top
       position absolute
-      top 0
+      top -24px
       left ratio(940)
       width ratio(1283)
       height ratio(504)
@@ -101,7 +94,7 @@
 
     &__bottom
       position absolute
-      bottom 0
+      bottom -24px
       left ratio(-2265.88)
       width ratio(1404)
       height ratio(504)
@@ -123,3 +116,13 @@
 
         &:first-child
           margin-right 72px
+
+@keyframes loader {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1.0);
+		opacity: 0;
+	}
+}

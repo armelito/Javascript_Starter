@@ -4,6 +4,8 @@ import each from 'lodash/each'
 import { toUpperCase } from './library'
 import NormalizeWheel from 'normalize-wheel'
 
+import Cursor from './classes/Cursor'
+
 import Experience from './experience/Experience.js'
 
 import Navigation from './components/Navigation'
@@ -16,6 +18,7 @@ export default class App
   constructor()
   {
     this.createContent()
+    this.createCursor()
     this.createExperience()
     this.createPreloader()
     this.createNavigation()
@@ -30,9 +33,14 @@ export default class App
     this.navigation = new Navigation({ template: this.template })
   }
 
+  createCursor()
+  {
+    this.cursor = new Cursor({ template: this.template })
+  }
+
   createPreloader()
   {
-    this.preloader = new Preloader({ experience: this.experience })
+    this.preloader = new Preloader({ experience: this.experience, cursor: this.cursor })
     this.preloader.once('completed', this.onPreloaded.bind(this))
   }
 
@@ -57,11 +65,17 @@ export default class App
     this.page.create()
   }
 
+  initParams()
+  {
+    const sizes = {}
+    sizes.width = window.innerWidth
+    sizes.height = window.innerHeight
+  }
+
   onPreloaded() {
     this.onResize()
 
     //this.experience.onPreloaded()
-
     this.page.show()
   }
 
@@ -77,7 +91,6 @@ export default class App
   {
     //this.experience.onChangeStart(this.template, url)
 
-    console.log(this.page)
     await this.page.hide()
 
     const res = await window.fetch(url)
@@ -123,6 +136,9 @@ export default class App
     if (this.page && this.page.onResize)
       this.page.onResize()
 
+    if (this.cursor && this.cursor.onResize)
+      this.cursor.onResize()
+
     window.requestAnimationFrame((_) =>
     {
       if (this.experience && this.experience.onResize)
@@ -157,8 +173,22 @@ export default class App
 
     if (this.page && this.page.onWheel)
       this.page.onWheel(normalizedWheel)
+
+    if (this.cursor && this.cursor.onWheel)
+      this.cursor.onWheel(normalizedWheel)
   }
 
+  onMouseEnter(e)
+  {
+    if (this.cursor && this.cursor.onMouseEnter)
+      this.cursor.onMouseEnter()
+  }
+
+  onMouseLeave(e)
+  {
+    if (this.cursor && this.cursor.onMouseLeave)
+      this.cursor.onMouseLeave()
+  }
   /*
    *  LOop
    */
@@ -167,6 +197,9 @@ export default class App
   {
     if (this.page && this.page.update)
       this.page.update()
+
+    if (this.cursor && this.cursor.update)
+      this.cursor.update(this.page.scroll)
 
     if (this.experience && this.experience.update)
       this.experience.update(this.page.scroll)
@@ -195,6 +228,9 @@ export default class App
 
     each(links, (link) =>
     {
+      link.addEventListener('mouseenter', this.onMouseEnter.bind(this))
+      link.addEventListener('mouseleave', this.onMouseLeave.bind(this))
+
       link.onclick = (event) =>
       {
         event.preventDefault()

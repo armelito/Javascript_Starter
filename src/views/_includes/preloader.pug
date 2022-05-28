@@ -2,13 +2,10 @@
   .preloader__box
     .preloader__media
       img.preloader__media__logo(data-src=preloader.data.image.url alt=preloader.data.image.alt)
+      .preloader__media__box
+        .preloader__media__box__loader
 
-    .preloader__loader
-      .preloader__loader__bars
-        .preloader__loader__bars__progress
-        .preloader__loader__bars__background
-
-      p.preloader__loader__number='0%'
+    p.preloader__number='0%'
 
     .preloader__transitionScreen
       .preloader__transitionScreen__top
