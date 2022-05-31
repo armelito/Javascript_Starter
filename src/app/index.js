@@ -1,25 +1,19 @@
 import '../styles/index.styl'
 
 import each from 'lodash/each'
-import { toUpperCase } from './library'
 import NormalizeWheel from 'normalize-wheel'
 
 import Cursor from './classes/Cursor'
-
-import Experience from './experience/Experience.js'
-
 import Navigation from './components/Navigation'
 import Preloader from './components/Preloader'
 
-import * as Pages from './pages'
-
+import { Home, About, } from './pages'
 export default class App
 {
   constructor()
   {
     this.createContent()
     this.createCursor()
-    this.createExperience()
     this.createPreloader()
     this.createNavigation()
     this.createPages()
@@ -40,16 +34,8 @@ export default class App
 
   createPreloader()
   {
-    this.preloader = new Preloader({ experience: this.experience, cursor: this.cursor })
+    this.preloader = new Preloader({ cursor: this.cursor })
     this.preloader.once('completed', this.onPreloaded.bind(this))
-  }
-
-  createExperience()
-  {
-    this.experience = new Experience({
-      targetElement: document.querySelector('.experience'),
-      template: this.template
-    })
   }
 
   createContent()
@@ -60,8 +46,13 @@ export default class App
 
   createPages()
   {
-    this.pages = { ...Pages }
-    this.page = new this.pages[toUpperCase(this.template)]()
+    this.pages =
+    {
+      about: new About(),
+      home: new Home(),
+    }
+
+    this.page = this.pages[this.template]
     this.page.create()
   }
 
@@ -72,10 +63,10 @@ export default class App
     sizes.height = window.innerHeight
   }
 
-  onPreloaded() {
+  onPreloaded()
+  {
     this.onResize()
 
-    //this.experience.onPreloaded()
     this.page.show()
   }
 
@@ -89,8 +80,6 @@ export default class App
 
   async onChange({ url, push = true })
   {
-    //this.experience.onChangeStart(this.template, url)
-
     await this.page.hide()
 
     const res = await window.fetch(url)
@@ -102,7 +91,6 @@ export default class App
 
       if (push) window.history.pushState({}, '', url)
 
-
       div.innerHTML = html
 
       const divContent = div.querySelector('.content')
@@ -113,8 +101,6 @@ export default class App
 
       this.content.setAttribute('data-template', this.template)
       this.content.innerHTML = divContent.innerHTML
-
-      //this.experience.onChangeEnd(this.template)
 
       this.page = this.pages[this.template]
       this.page.create()
@@ -138,38 +124,27 @@ export default class App
 
     if (this.cursor && this.cursor.onResize)
       this.cursor.onResize()
-
-    window.requestAnimationFrame((_) =>
-    {
-      if (this.experience && this.experience.onResize)
-        this.experience.onResize()
-    })
   }
 
   onTouchDown(e)
   {
-    if (this.experience && this.experience.onTouchDown)
-      this.experience.onTouchDown(e)
+
   }
 
   onTouchMove(e)
   {
-    if (this.experience && this.experience.onTouchMove)
-      this.experience.onTouchMove(e)
+    if (this.cursor && this.cursor.onCursorMove)
+      this.cursor.onCursorMove(e)
   }
 
   onTouchUp(e)
   {
-    if (this.experience && this.experience.onTouchUp)
-      this.canvas.onTouchUp(e)
+
   }
 
   onWheel(e)
   {
     const normalizedWheel = NormalizeWheel(e)
-
-    if (this.experience && this.experience.onWheel)
-      this.experience.onWheel(normalizedWheel)
 
     if (this.page && this.page.onWheel)
       this.page.onWheel(normalizedWheel)
@@ -200,9 +175,6 @@ export default class App
 
     if (this.cursor && this.cursor.update)
       this.cursor.update(this.page.scroll)
-
-    if (this.experience && this.experience.update)
-      this.experience.update(this.page.scroll)
 
     this.frame = window.requestAnimationFrame(this.update.bind(this))
   }

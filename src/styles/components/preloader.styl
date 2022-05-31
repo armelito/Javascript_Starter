@@ -12,7 +12,7 @@
   height 100vh
   z-index 20
 
-  &__box
+  &__wrapper
     display flex
     flex-direction column
     align-items center
@@ -21,8 +21,8 @@
 
   &__media
     position relative
-    width ratio(80)
-    height ratio(80)
+    width ratio(50)
+    height ratio(50)
 
     & img
       position absolute
@@ -49,73 +49,6 @@
         border-radius 50%
         background $grey-5
         animation loader 1.0s infinite ease-in-out
-
-
-  &__number
-    line-height 140%
-    font-family $font-family-helvetica-regular
-    font-size $font-size-bodyMedium
-    color $white
-
-  &__transitionScreen
-    position absolute
-    top 0
-    left 0
-    bottom 0
-    right 0
-
-    widht 100vw
-    height 100vh
-
-    &__top
-      position absolute
-      top -24px
-      left ratio(940)
-      width ratio(1283)
-      height ratio(504)
-
-      display flex
-
-      transition transform 300ms $ease-out-01
-      opacity 0
-      //transform translateX(120vw)
-      will(transform)
-
-      p
-        font-family $font-family-helvetica-extraBold
-        font-weight 900
-        font-size 360px
-        line-height 140%
-        letter-spacing 2%
-        color $primary
-
-        &:first-child
-          margin-right 72px
-
-    &__bottom
-      position absolute
-      bottom -24px
-      left ratio(-2265.88)
-      width ratio(1404)
-      height ratio(504)
-
-      display flex
-
-      transition transform 300ms $ease-out-01
-      opacity 0
-      //transform translateX(-150vw)
-      will(transform)
-
-      p
-        font-family $font-family-helvetica-extraBold
-        font-weight 900
-        font-size 360px
-        line-height 140%
-        letter-spacing 2%
-        color $primary
-
-        &:first-child
-          margin-right 72px
 
 @keyframes loader {
 	0% {

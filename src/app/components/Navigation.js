@@ -1,18 +1,14 @@
 import GSAP from 'gsap'
 import Component from 'classes/Component'
-import { FLOEMA_BRIGHT_GREY, FLOEMA_WHITE } from '../utils/colors'
-
+import { WHITE, FONT_COLOR_INACTIVE } from '../utils/colors'
 export default class Navigation extends Component
 {
   constructor({ template })
   {
     super({
       element: '.navigation',
-      elements: {
-        items: '.navigation__list__item',
-        links: '.navigation__list__link',
-      },
-    });
+      elements: {},
+    })
 
     this.onChange(template)
   }
@@ -21,45 +17,26 @@ export default class Navigation extends Component
   {
     if (template === 'about')
     {
-      GSAP.to(this.element,
+      /*GSAP.to(this.elements.links[0],
       {
-        color: FLOEMA_BRIGHT_GREY,
-        duration: 1.5,
+        fontSize: 16,
+        fontFamily: 'Mulish-SemiBold',
+        color: FONT_COLOR_INACTIVE,
+        autoRound: false,
+        ease: 'expo.out',
+        delay: 0.08,
+        duration: 0.4,
       })
 
-      GSAP.to(this.elements.items[0],
+      GSAP.to(this.elements.links[1],
       {
-        autoAlpha: 1,
-        delay: 0.75,
-        duration: 0.75,
-      })
-
-      GSAP.to(this.elements.items[1],
-      {
-        autoAlpha: 0,
-        duration: 0.75,
-      })
-    }
-    else
-    {
-      GSAP.to(this.element,
-      {
-        color: FLOEMA_WHITE,
-        duration: 1.5,
-      })
-
-      GSAP.to(this.elements.items[0],
-      {
-        autoAlpha: 0,
-        duration: 0.75,
-      })
-
-      GSAP.to(this.elements.items[1],
-      {
-        autoAlpha: 1,
-        delay: 0.75,
-        duration: 0.75,
-      })
+        fontSize: 18,
+        fontFamily: 'Mulish-ExtraBold',
+        color: WHITE,
+        autoRound: false,
+        ease: 'expo.out',
+        duration: 0.4,
+      })*/
     }
   }
 }

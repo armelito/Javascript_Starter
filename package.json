@@ -1,7 +1,7 @@
 {
-  "name": "armel-cantin",
+  "name": "play-me",
   "version": "1.0.0",
-  "description": "Welcome to my portfolio. In this place you can find my work and discover who I am. Contact me if you want to work with me.",
+  "description": "Web app based on spotify API to create collaborative playlist with friends",
   "scripts": {
     "backend:build": "node ./server/init.js",
     "backend:development": "nodemon ./server/init.js",
@@ -11,13 +11,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/armelito/ArmelCantin.git"
+    "url": "git+https://github.com/armelito/PlayMe.git"
   },
   "keywords": [],
   "author": "Armel Cantin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/armelito/ArmelCantin/issues"
+    "url": "https://github.com/armelito/PlayMe/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",

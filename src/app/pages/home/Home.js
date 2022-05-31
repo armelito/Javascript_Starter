@@ -1,7 +1,3 @@
-import Page from '../../classes/Page'
-import Button from '../../classes/Button'
-import Gallery from '../../components/Gallery'
-
 export default class Home extends Page
 {
   constructor()
@@ -9,22 +5,13 @@ export default class Home extends Page
     super({
       id: 'home',
       element: '.home',
-      elements:
-      {
-        wrapper: '.home__wrapper',
-        section: document.querySelector('.gallery__project'),
-        navigation: document.querySelector('.navigation'),
-      },
-      components: ['gallery'],
-      infiniteScroll: true
+      elements: {}
     })
   }
 
   create()
   {
     super.create()
-
-    this.gallery = new Gallery()
   }
 
   destroy()

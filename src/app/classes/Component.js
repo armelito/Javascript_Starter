@@ -7,7 +7,6 @@ export default class Component extends EventEmitter
   {
     super()
 
-
     this.selector = element
     this.selectorChildren = { ...elements, }
 
@@ -51,7 +50,7 @@ export default class Component extends EventEmitter
           this.elements[key] = document.querySelector(entry)
         }
       }
-    });
+    })
   }
 
   addEventListeners() {}

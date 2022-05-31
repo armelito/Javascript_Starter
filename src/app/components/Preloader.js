@@ -4,7 +4,7 @@ import Component from 'classes/Component'
 import each from 'lodash/each'
 export default class Preloader extends Component
 {
-  constructor({ experience, cursor })
+  constructor({ cursor })
   {
     super({
       element: '.preloader',
@@ -12,18 +12,11 @@ export default class Preloader extends Component
       {
         media: '.preloader__media',
         logo: '.preloader__media__logo',
-        number: '.preloader__number',
-        transitionScreen: '.preloader__transitionScreen',
-        animationTop: '.preloader__transitionScreen__top',
-        animationBottom: '.preloader__transitionScreen__bottom',
         images: document.querySelectorAll('img')
       },
     })
 
-    this.experience = experience
     this.cursor = cursor
-
-    window.TEXTURES = {}
 
     this.length = 0
 
@@ -39,32 +32,11 @@ export default class Preloader extends Component
     })
   }
 
-  loadTexture(image)
-  {
-    const texture = new THREE.Texture(image)
-    texture.needsUpdate = true
-
-    const media = new window.Image()
-
-    media.crossOrigin = 'anonymous'
-    media.src = image
-    media.onload = (_) =>
-    {
-      texture.image = media
-
-      //this.onAssetLoaded()
-    }
-
-    window.TEXTURES[image] = texture
-  }
-
   onAssetLoaded()
   {
     this.length++
 
     const percent = this.length / this.elements.images.length
-
-    this.elements.number.innerHTML = `${Math.round(percent * 100)}%`
 
     if (percent === 1)
       this.onLoaded()
@@ -80,7 +52,6 @@ export default class Preloader extends Component
 
       const animation = GSAP.timeline()
       animation.add(this.hideLoader())
-      animation.add(this.namesTranslation())
       animation.add(this.showCursor())
       animation.add(this.hidePreloader(resolve))
     })
@@ -95,21 +66,6 @@ export default class Preloader extends Component
       },
       delay: 1
     })
-
-    this.timeline.to(this.elements.number,
-    {
-      duration: 3,
-      scale: 0,
-      opacity: 0,
-      transformOrigin: '50% 100%',
-      delay: 0.1,
-    }, 0)
-
-    this.timeline.to(this.elements.number,
-    {
-      duration: 0.8,
-      y: '30%',
-    }, 0)
 
     this.timeline.to(this.elements.media,
     {
@@ -127,58 +83,10 @@ export default class Preloader extends Component
     }, 0)
   }
 
-  namesTranslation()
-  {
-    this.timeline = GSAP.timeline({ delay: 3.2 })
-
-    this.timeline.to(this.elements.animationTop,
-    {
-      opacity: 1,
-      x: '-1400',
-      ease: 'expo.out',
-      duration: 0.8
-    }, 0)
-
-    this.timeline.to(this.elements.animationBottom,
-    {
-      opacity: 1,
-      x: '1400',
-      ease: 'expo.out',
-      duration: 0.8
-    }, 0)
-
-    this.timeline.to(this.elements.animationTop,
-    {
-      x: '-1500',
-      duration: 3,
-    }, 0.6)
-
-    this.timeline.to(this.elements.animationBottom,
-    {
-      x: '1500',
-      duration: 3,
-    }, 0.6)
-
-    this.timeline.to(this.elements.animationTop,
-    {
-      x: '-4000',
-      ease: 'expo.out',
-      duration: 1.8,
-    }, 2.7)
-
-    this.timeline.to(this.elements.animationBottom,
-    {
-      x: '4000',
-      ease: 'expo.out',
-      duration: 1.8,
-    }, 2.7)
-  }
-
   showCursor()
   {
     this.cursor.show()
   }
-
 
   hidePreloader(resolve)
   {

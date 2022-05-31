@@ -7,7 +7,6 @@ const errorHandler = require('errorhandler')
 const path = require('path')
 const cors = require('cors')
 const routes = require('./routes/index')
-const prismicMiddleware = require('./middlewares/prismic')
 const errorMiddleware = require('./middlewares/error')
 
 module.exports = (() =>
@@ -31,7 +30,6 @@ module.exports = (() =>
   server.use(cors())
   server.use(bodyParser.json())
   server.use(bodyParser.urlencoded({ extended: false }))
-  server.use(prismicMiddleware)
   server.use(errorMiddleware)
   server.use(methodOverride())
   server.use(errorHandler())

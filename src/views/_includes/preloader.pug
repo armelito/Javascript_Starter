@@ -1,17 +1,6 @@
 .preloader
-  .preloader__box
+  .preloader__wrapper
     .preloader__media
-      img.preloader__media__logo(data-src=preloader.data.image.url alt=preloader.data.image.alt)
+      img.preloader__media__logo(data-src='/icons/white-logo.svg' alt='logo preloader')
       .preloader__media__box
         .preloader__media__box__loader
-
-    p.preloader__number='0%'
-
-    .preloader__transitionScreen
-      .preloader__transitionScreen__top
-        p=preloader.data.animation_top
-        p=preloader.data.animation_bottom
-
-      .preloader__transitionScreen__bottom
-        p=preloader.data.animation_top
-        p=preloader.data.animation_bottom

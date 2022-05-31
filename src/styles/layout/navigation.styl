@@ -1,38 +1,17 @@
 .navigation
   position fixed
+  top 0
+  left 0
   z-index 2
 
-  &__wrapper
-    @extend .flex--bc
+  width 73px
+  height 100vh
+  padding 0 $padding-navigation-horizontal
 
-    width 80px
-    height 100vh
-    //padding $verticalPadding $horizontalPadding
+  &__wrapper
+    @extend .flex--cc
+
+    height 100%
 
   &__list
     @extend .flex--bc
-
-    height pxToRem(40)
-
-    transform rotate(90deg) translateY(200%)
-    will(transform)
-
-    &__item
-      flex(1 1 auto)
-      @extend .flex--cb
-
-      padding 8px
-      height 100%
-
-      &:first-child
-        margin-right 32px
-
-    &__link
-      @extend .link--hidden
-
-      height 100%
-      line-height pxToRem(20)
-
-      font-family $font-family-helvetica-bold
-      font-size $font-size-bodyLarge
-      color $font-color-inactive

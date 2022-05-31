@@ -5,12 +5,13 @@ html(class= isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : ""
     include head
   body
     include preloader
+    include header
     include navigation
-    include cursor
 
     #content.content(data-template=template)
       block content
 
     .experience
 
+    include footer
     include scripts
